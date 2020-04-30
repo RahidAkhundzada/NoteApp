@@ -2,8 +2,11 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {connect} from 'react-redux';
+
 import Login from './Screen/Login';
 import Note from './Screen/Note';
+import NoteAdd from './Screen/NoteAdd';
+
 const StackApp = createStackNavigator();
 const StackApp1 = createStackNavigator();
 
@@ -25,11 +28,15 @@ const StackNav1 = () => {
   return (
     <NavigationContainer>
       <StackApp1.Navigator>
+        
         <StackApp1.Screen
           name="Note"
           component={Note}
           options={{headerShown: false}}
         />
+
+        <StackApp1.Screen name='NoteAdd' component={NoteAdd}/>
+
       </StackApp1.Navigator>
     </NavigationContainer>
   );
@@ -38,7 +45,7 @@ const StackNav1 = () => {
 const App = props => {
   return (
     <React.Fragment>
-      {props.Login ? <StackNav /> : <StackNav1 />}
+      {!props.Login ? <StackNav /> : <StackNav1 />}
     </React.Fragment>
   );
 };

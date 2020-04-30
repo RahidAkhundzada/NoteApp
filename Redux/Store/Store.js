@@ -4,6 +4,6 @@ import persistedReducer from '../Reducer/index';
 //import storage from 'redux-persist/lib/storage';
 import {persistStore} from 'redux-persist';
 
-export const store = createStore(persistedReducer);
+export const store = createStore(persistedReducer,{},applyMiddleware(createLogger()));
 
 export const Pstore = persistStore(store);
