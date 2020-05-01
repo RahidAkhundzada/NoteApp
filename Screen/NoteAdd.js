@@ -5,6 +5,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -14,10 +15,12 @@ import {
   NoteAction3,
   NoteAction4,
   NoteAction5,
+  NoteAction7,
 } from '../Redux/Action/NoteAction';
 
 const NoteAdd = props => {
   const navigation = useNavigation();
+
   const Time = () => {
     let date = new Date();
     var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
@@ -27,9 +30,11 @@ const NoteAdd = props => {
     var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
     var minute =
       date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var second = date.getSeconds();
 
     props.NoteAction5(hour + '.' + minute);
     props.NoteAction4(day + '.' + month + '.' + year);
+    props.NoteAction7(year + month + day + hour + minute + second);
   };
 
   const TitleFunc = text => {
@@ -41,17 +46,21 @@ const NoteAdd = props => {
   };
 
   let newobj = {
-    A: props.title,
-    B: props.note,
-    C: props.timeDay,
-    D: props.time,
+    ID: props.ID,
+    Title: props.title,
+    Note: props.note,
+    TimeDay: props.timeDay,
+    Time: props.time,
   };
-  const AddNote = async () => {
-    await Time();
-    await NoteAction1(props.title);
-    console.log(props.notes);
+  const AddNote = () => {
+    Time();
+    setTimeout(() => {
+      props.NoteAction1(newobj);
+    }, 100);
 
-    navigation.navigate('Note');
+    setTimeout(() => {
+      navigation.navigate('Note');
+    }, 200);
   };
 
   return (
@@ -81,6 +90,7 @@ const mapStateToProps = state => {
     note: state.Note.note,
     timeDay: state.Note.timeDay,
     time: state.Note.time,
+    ID: state.Note.ID,
   };
 };
 
@@ -100,6 +110,9 @@ const mapDispatchToProps = dispatch => {
     },
     NoteAction5: value => {
       dispatch(NoteAction5(value));
+    },
+    NoteAction7: value => {
+      dispatch(NoteAction7(value));
     },
   };
 };

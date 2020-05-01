@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import {connect} from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {connect} from 'react-redux';
 
 import Login from './Screen/Login';
 import Note from './Screen/Note';
 import NoteAdd from './Screen/NoteAdd';
+import NoteFullView from './Screen/NoteFullView';
 
 const StackApp = createStackNavigator();
 const StackApp1 = createStackNavigator();
@@ -28,31 +29,27 @@ const StackNav1 = () => {
   return (
     <NavigationContainer>
       <StackApp1.Navigator>
-        
         <StackApp1.Screen
           name="Note"
           component={Note}
           options={{headerShown: false}}
         />
 
-        <StackApp1.Screen name='NoteAdd' component={NoteAdd}/>
-
+        <StackApp1.Screen name="NoteAdd" component={NoteAdd} />
+        <StackApp1.Screen name="NoteFullView" component={NoteFullView} />
       </StackApp1.Navigator>
     </NavigationContainer>
   );
 };
 
 const App = props => {
-  return (
-    <React.Fragment>
-      {!props.Login ? <StackNav /> : <StackNav1 />}
-    </React.Fragment>
-  );
+  console.log(props.Login);
+  return <Fragment>{!props.Login ? <StackNav1 /> : <StackNav />}</Fragment>;
 };
 
 const mapStateToProps = state => {
   return {
-    Login: state.Auth.login,
+    Login: state.Auth.Login,
   };
 };
 

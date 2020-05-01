@@ -29,3 +29,27 @@ export const NoteAction5 = value => {
     time: value,
   };
 };
+export const NoteAction6 = value => {
+  return {
+    type: 'NOTE6',
+    nottes: value,
+  };
+};
+export const NoteAction7 = value => {
+  return {
+    type: 'NOTE7',
+    ID: value,
+  };
+};
+export const NoteAction8 = value => {
+  return {
+    type: 'NOTE8',
+    NewData: value,
+  };
+};
+export const NoteAction9 = value => {
+  return {
+    type: 'NOTE9',
+    text: value,
+  };
+};

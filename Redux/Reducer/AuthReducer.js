@@ -1,7 +1,7 @@
 const AUTH = 'AUTH';
 
 const initialState = {
-  login: true,
+  Login: false,
 };
 
 export const AuthReducer = (state = initialState, action) => {
@@ -9,7 +9,7 @@ export const AuthReducer = (state = initialState, action) => {
     case AUTH:
       return {
         ...state,
-        login: action.login,
+        Login: action.Login,
       };
 
     default:
