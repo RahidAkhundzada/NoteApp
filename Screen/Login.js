@@ -9,8 +9,21 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import {connect} from 'react-redux';
+import {AuthAction} from '../Redux/Action/AuthAction';
 
-const Login = () => {
+const Login = props => {
+  let User = null,
+    Password = null,
+
+    LoginFunc = () => {
+      if (User === 'Admin' && Password === 'Admin') {
+        props.AuthAction(true);
+      } else {
+        alert('Please correct Username or Password');
+      }
+    };
+
   return (
     <View style={styles.container}>
       <Image
@@ -19,17 +32,17 @@ const Login = () => {
       />
       <TextInput
         style={styles.TextInput}
-        placeholder="Email"
-        textContentType="emailAddress"
+        placeholder="Username"
+        onChangeText={text => (User = text)}
       />
       <TextInput
         style={styles.TextInput}
         placeholder="Password"
         secureTextEntry
-        
+        onChangeText={text => (Password = text)}
       />
       <View style={styles.btnView}>
-        <TouchableOpacity style={styles.btnStyle}>
+        <TouchableOpacity style={styles.btnStyle} onPress={() => LoginFunc()}>
           <Text>Log In</Text>
         </TouchableOpacity>
       </View>
@@ -37,7 +50,18 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    AuthAction: value => {
+      dispatch(AuthAction(value));
+    },
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Login);
 
 const styles = StyleSheet.create({
   container: {

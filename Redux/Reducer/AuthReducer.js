@@ -1,4 +1,4 @@
-const AUTH = 'AUTH';
+const LOGIN = 'LOGIN';
 
 const initialState = {
   Login: false,
@@ -6,7 +6,7 @@ const initialState = {
 
 export const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AUTH:
+    case LOGIN:
       return {
         ...state,
         Login: action.Login,

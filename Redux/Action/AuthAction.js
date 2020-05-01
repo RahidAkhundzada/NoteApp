@@ -1,6 +1,6 @@
-export const AUTHAction1 = value => {
+export const AuthAction = value => {
   return {
-    type: 'AUTH',
-    notes: value,
+    type: 'LOGIN',
+    Login: value,
   };
 };

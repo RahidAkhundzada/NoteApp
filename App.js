@@ -7,6 +7,7 @@ import Login from './Screen/Login';
 import Note from './Screen/Note';
 import NoteAdd from './Screen/NoteAdd';
 import NoteFullView from './Screen/NoteFullView';
+import NoteEditor from './Screen/NoteEditor';
 
 const StackApp = createStackNavigator();
 const StackApp1 = createStackNavigator();
@@ -37,19 +38,19 @@ const StackNav1 = () => {
 
         <StackApp1.Screen name="NoteAdd" component={NoteAdd} />
         <StackApp1.Screen name="NoteFullView" component={NoteFullView} />
+        <StackApp1.Screen name="NoteEditor" component={NoteEditor} />
       </StackApp1.Navigator>
     </NavigationContainer>
   );
 };
 
 const App = props => {
-  console.log(props.Login);
-  return <Fragment>{!props.Login ? <StackNav1 /> : <StackNav />}</Fragment>;
+  return <Fragment>{props.Login ? <StackNav1 /> : <StackNav />}</Fragment>;
 };
 
 const mapStateToProps = state => {
   return {
-    Login: state.Auth.Login,
+    Login: state.Logged.Login,
   };
 };
 

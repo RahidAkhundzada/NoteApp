@@ -7,6 +7,7 @@ const NOTE6 = 'NOTE6';
 const NOTE7 = 'NOTE7';
 const NOTE8 = 'NOTE8';
 const NOTE9 = 'NOTE9';
+const NOTE10 = 'NOTE10';
 
 const initialState = {
   notes: [],
@@ -17,6 +18,7 @@ const initialState = {
   ID: '',
   text: '',
   NewData: [],
+  lastEdited:''
 };
 
 export const NoteReducer = (state = initialState, action) => {
@@ -65,6 +67,11 @@ export const NoteReducer = (state = initialState, action) => {
       return {
         ...state,
         text: action.text,
+      };
+      case NOTE10:
+      return {
+        ...state,
+        lastEdited: action.lastEdited,
       };
     default:
       return state;

@@ -12,7 +12,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  Auth: AuthReducer,
+  Logged: AuthReducer,
   Note: NoteReducer,
 });
 

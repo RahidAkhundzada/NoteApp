@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, Component} from 'react';
 import {
   StyleSheet,
   Text,
@@ -19,7 +19,11 @@ const Note = props => {
 
   const TEXT = props.text;
 
-  const SearchbyTitle = TEXT => {
+  useEffect(() => {
+    DBB();
+  });
+
+  function SearchbyTitle(TEXT) {
     const newData = props.notes.filter(function(item) {
       const itemData = item.Title ? item.Title.toUpperCase() : ''.toUpperCase();
       const textData = TEXT.toUpperCase();
@@ -27,12 +31,21 @@ const Note = props => {
     });
     props.NoteAction8(newData);
     props.NoteAction9(TEXT);
-  };
+  }
+
+  function DBB() {
+    var DB;
+    if (TEXT === '') {
+      DB = props.notes;
+    } else {
+      DB = props.NewData;
+    }
+    return DB;
+  }
 
   return (
     <View style={styles.container}>
       <Header title="Notes" />
-
       <TextInput
         style={styles.textInputStyle}
         onChangeText={text => SearchbyTitle(text)}
@@ -43,7 +56,7 @@ const Note = props => {
 
       <View style={styles.flatstyle}>
         <FlatList
-          data={props.NewData}
+          data={DBB()}
           keyExtractor={item => item.ID}
           renderItem={({item}) => (
             <NoteLister item={item} navigation={navigation} />
@@ -57,7 +70,10 @@ const Note = props => {
         </View>
 
         <View style={styles.add}>
-          <TouchableOpacity onPress={() => navigation.navigate('NoteAdd')}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('NoteAdd');
+            }}>
             <Image source={require('../Image/addnote.png')} />
           </TouchableOpacity>
         </View>

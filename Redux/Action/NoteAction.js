@@ -53,3 +53,9 @@ export const NoteAction9 = value => {
     text: value,
   };
 };
+export const NoteAction10 = value => {
+  return {
+    type: 'NOTE10',
+    lastEdited: value,
+  };
+};

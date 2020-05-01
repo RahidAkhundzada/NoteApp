@@ -28,7 +28,8 @@ const NoteFullView = ({navigation, route}) => {
         </ScrollView>
       </View>
       <View style={styles.editor}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('NoteEditor', {item: item})}>
           <Image source={require('../Image/editing.png')} />
         </TouchableOpacity>
       </View>
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
   },
   editor: {
     height: '15%',
-    alignItems:'center',
+    alignItems: 'center',
     margin: 10,
   },
 });
