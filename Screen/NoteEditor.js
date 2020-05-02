@@ -15,36 +15,41 @@ const NoteEditor = ({notes, NoteAction6, navigation, route}) => {
   const {item} = route.params;
   const [Title, setTitle] = useState(item.Title);
   const [Note, setNote] = useState(item.Note);
-  const [data, setdata] = useState(notes);
 
   var ID = item.ID;
 
   const Find = notes.findIndex(par => par.ID === ID);
 
+  let newData = [...notes];
+
   const EditNote = text => {
     setNote(text);
+    GetTime();
   };
   const EditTitle = text => {
     setTitle(text);
+    GetTime();
   };
 
-  let date = new Date();
-  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-  var month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
-  var year =
-    date.getFullYear() < 10 ? '0' + date.getFullYear() : date.getFullYear();
-  var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
-  var minute =
-    date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-  var lastEdited = hour + '.' + minute + '/' + day + '.' + month + '.' + year;
+  function GetTime() {
+    let date = new Date();
+    var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
+    var year =
+      date.getFullYear() < 10 ? '0' + date.getFullYear() : date.getFullYear();
+    var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var minute =
+      date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var lastEdited = hour + '.' + minute + '/' + day + '.' + month + '.' + year;
+    return lastEdited;
+  }
 
   const SaveNote = () => {
-    data[Find].Title = Title;
-    data[Find].Note = Note;
-    data[Find].LastEdited = lastEdited;
-    setdata(data);
+    newData[Find].Title = Title;
+    newData[Find].Note = Note;
+    newData[Find].LastEdited = GetTime();
     setTimeout(() => {
-      NoteAction6(data);
+      NoteAction6(newData);
       navigation.navigate('Note');
     }, 300);
   };

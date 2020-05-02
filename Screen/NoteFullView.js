@@ -20,6 +20,7 @@ const NoteFullView = ({navigation, route}) => {
         <View style={styles.TimeStyle}>
           <Text style={styles.TimeText}>Created Day : {item.TimeDay}</Text>
           <Text style={styles.TimeText}>Created Time : {item.Time}</Text>
+          <Text style={styles.TimeText}>Edited Time : {item.LastEdited}</Text>
         </View>
       </View>
       <View style={styles.NoteStyle}>

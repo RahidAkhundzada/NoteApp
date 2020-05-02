@@ -20,28 +20,30 @@ import {
 
 const NoteAdd = props => {
   const navigation = useNavigation();
+  function GetTime() {
+    let date = new Date();
+    var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
+    var year =
+      date.getFullYear() < 10 ? '0' + date.getFullYear() : date.getFullYear();
+    var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var minute =
+      date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var second = date.getSeconds();
 
-  let date = new Date();
-  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-  var month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
-  var year =
-    date.getFullYear() < 10 ? '0' + date.getFullYear() : date.getFullYear();
-  var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
-  var minute =
-    date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-  var second = date.getSeconds();
-
-  props.NoteAction5(hour + '.' + minute);
-  props.NoteAction4(day + '.' + month + '.' + year);
-  props.NoteAction7(year + month + day + hour + minute + second);
- 
+    props.NoteAction5(hour + '.' + minute);
+    props.NoteAction4(day + '.' + month + '.' + year);
+    props.NoteAction7(year + month + day + hour + minute + second);
+  }
 
   const TitleFunc = text => {
     props.NoteAction2(text);
+    GetTime();
   };
 
   const NoteFunc = text => {
     props.NoteAction3(text);
+    GetTime();
   };
 
   let newobj = {
@@ -50,12 +52,10 @@ const NoteAdd = props => {
     Note: props.note,
     TimeDay: props.timeDay,
     Time: props.time,
-    LastEdited: '',
+    LastEdited: 'not edited',
   };
   const AddNote = () => {
-    setTimeout(() => {
-      props.NoteAction1(newobj);
-    }, 100);
+    props.NoteAction1(newobj);
 
     setTimeout(() => {
       navigation.navigate('Note');
