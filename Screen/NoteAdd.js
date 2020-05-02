@@ -59,6 +59,8 @@ const NoteAdd = props => {
     props.NoteAction1(newobj);
 
     setTimeout(() => {
+      props.NoteAction2('');
+      props.NoteAction3('');
       navigation.navigate('Note');
     }, 200);
   };
