@@ -35,9 +35,9 @@ const NoteEditor = ({notes, NoteAction6, navigation, route}) => {
 
   function GetTime() {
     let date = new Date();
+    let ay = date.getMonth() + 1;
     var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-    var month =
-      date.getMonth() < 10 ? '0' + date.getMonth() + 1 : date.getMonth() + 1;
+    var month = ay < 10 ? '0' + ay : ay;
     var year =
       date.getFullYear() < 10 ? '0' + date.getFullYear() : date.getFullYear();
     var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
