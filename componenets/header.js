@@ -1,25 +1,59 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity, Text, View, StyleSheet, Image} from 'react-native';
+import {connect} from 'react-redux';
+import {AuthAction} from '../Redux/Action/AuthAction';
 
-const Header = ({title}) => {
+const Header = ({AuthAction, title}) => {
+  function LogOut() {
+    AuthAction(false);
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.textstyl}>{title}</Text>
+      <View style={styles.textView}>
+        <Text style={styles.textstyl}>{title}</Text>
+      </View>
+
+      <View style={styles.logStyle}>
+        <TouchableOpacity onPress={() => LogOut()}>
+          <Image source={require('../Image/logout.png')} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
-export default Header;
+const mapDispatchToProps = dispatch => {
+  return {
+    AuthAction: value => {
+      dispatch(AuthAction(value));
+    },
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Header);
 
 const styles = StyleSheet.create({
   container: {
-    height: 40,
+    flex: 0.8,
     backgroundColor: 'tomato',
+    flexDirection: 'row',
+  },
+
+  textView: {
+    flex: 7,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textstyl: {
     fontSize: 30,
-    fontFamily: 'Cochin',
+  },
+  logStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

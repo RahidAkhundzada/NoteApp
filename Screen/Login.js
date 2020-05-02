@@ -1,21 +1,12 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Button,
-  Dimensions,
-  Image,
-} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {AuthAction} from '../Redux/Action/AuthAction';
+import {LoginStyle} from '../componenets/AllStyle';
 
 const Login = props => {
   let User = null,
     Password = null,
-
     LoginFunc = () => {
       if (User === 'Admin' && Password === 'Admin') {
         props.AuthAction(true);
@@ -25,24 +16,26 @@ const Login = props => {
     };
 
   return (
-    <View style={styles.container}>
+    <View style={LoginStyle.container}>
       <Image
         source={require('../Image/note.png')}
         style={{height: '50%', width: '100%'}}
       />
       <TextInput
-        style={styles.TextInput}
+        style={LoginStyle.TextInput}
         placeholder="Username"
         onChangeText={text => (User = text)}
       />
       <TextInput
-        style={styles.TextInput}
+        style={LoginStyle.TextInput}
         placeholder="Password"
         secureTextEntry
         onChangeText={text => (Password = text)}
       />
-      <View style={styles.btnView}>
-        <TouchableOpacity style={styles.btnStyle} onPress={() => LoginFunc()}>
+      <View style={LoginStyle.btnView}>
+        <TouchableOpacity
+          style={LoginStyle.btnStyle}
+          onPress={() => LoginFunc()}>
           <Text>Log In</Text>
         </TouchableOpacity>
       </View>
@@ -62,29 +55,3 @@ export default connect(
   null,
   mapDispatchToProps,
 )(Login);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  TextInput: {
-    borderWidth: 0.5,
-    borderColor: 'gray',
-    height: 40,
-    margin: 10,
-    borderRadius: 10,
-  },
-  btnView: {
-    alignItems: 'center',
-    margin: 20,
-  },
-  btnStyle: {
-    height: 50,
-    width: 80,
-    borderRadius: 10,
-    backgroundColor: 'tomato',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

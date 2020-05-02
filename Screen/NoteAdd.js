@@ -1,11 +1,10 @@
 import React from 'react';
 import {
-  StyleSheet,
+  ANStyleheet,
   View,
   TextInput,
   Image,
   TouchableOpacity,
-  Button,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -17,9 +16,11 @@ import {
   NoteAction5,
   NoteAction7,
 } from '../Redux/Action/NoteAction';
+import {ANStyle} from '../componenets/AllStyle';
 
 const NoteAdd = props => {
   const navigation = useNavigation();
+
   function GetTime() {
     let date = new Date();
     var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
@@ -63,20 +64,20 @@ const NoteAdd = props => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={ANStyle.container}>
       <TextInput
         placeholder="Title"
-        style={styles.textInput1}
+        style={ANStyle.textInput1}
         multiline={true}
         onChangeText={text => TitleFunc(text)}
       />
       <TextInput
         placeholder="Add Note Here"
-        style={styles.textInput2}
+        style={ANStyle.textInput2}
         multiline={true}
         onChangeText={text => NoteFunc(text)}
       />
-      <TouchableOpacity style={styles.touchStyle} onPress={() => AddNote()}>
+      <TouchableOpacity style={ANStyle.touchStyle} onPress={() => AddNote()}>
         <Image source={require('../Image/addnote1.png')} />
       </TouchableOpacity>
     </View>
@@ -120,27 +121,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(NoteAdd);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  textInput1: {
-    borderBottomColor: 'red',
-
-    borderBottomWidth: 0.5,
-    margin: 20,
-    width: '70%',
-  },
-  textInput2: {
-    margin: 5,
-    borderColor: 'red',
-    borderWidth: 0.5,
-    height: '60%',
-    width: '90%',
-  },
-  touchStyle: {
-    margin: 10,
-  },
-});

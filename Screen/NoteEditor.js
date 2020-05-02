@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
+  NEStyleheet,
   Text,
   View,
   TextInput,
   ScrollView,
   Image,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {NoteAction6, NoteAction10} from '../Redux/Action/NoteAction';
+import {NEStyle} from '../componenets/AllStyle';
 
 const NoteEditor = ({notes, NoteAction6, navigation, route}) => {
   const {item} = route.params;
@@ -17,9 +21,7 @@ const NoteEditor = ({notes, NoteAction6, navigation, route}) => {
   const [Note, setNote] = useState(item.Note);
 
   var ID = item.ID;
-
   const Find = notes.findIndex(par => par.ID === ID);
-
   let newData = [...notes];
 
   const EditNote = text => {
@@ -55,40 +57,34 @@ const NoteEditor = ({notes, NoteAction6, navigation, route}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.NoteTextStyle}>Title</Text>
-      <View style={styles.Title}>
+    <SafeAreaView style={NEStyle.container}>
+      <Text style={NEStyle.NoteTextStyle}>Title</Text>
+      <View style={NEStyle.Title}>
         <TextInput
           onChangeText={text => EditTitle(text)}
           placeholder="Title"
           value={Title}
-          style={styles.HeaderTextInput}
+          style={NEStyle.HeaderTextInput}
         />
       </View>
+      <Text style={NEStyle.NoteTextStyle}>Note</Text>
 
-      <View>
-        <View>
-          <Text style={styles.NoteTextStyle}>Note</Text>
-        </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView style={NEStyle.Note}>
+          <TextInput
+            onChangeText={text => EditNote(text)}
+            value={Note}
+            multiline={true}
+            placeholder="Note"
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
 
-        <View style={styles.Note}>
-          <ScrollView>
-            <TextInput
-              onChangeText={text => EditNote(text)}
-              value={Note}
-              multiline={true}
-              placeholder="Note"
-            />
-          </ScrollView>
-        </View>
-      </View>
-
-      <View style={styles.btnView}>
-        <TouchableOpacity style={{height: 220}} onPress={() => SaveNote()}>
-          <Image source={require('../Image/save.png')} />
-        </TouchableOpacity>
-      </View>
-    </View>
+      <TouchableOpacity onPress={() => SaveNote()} style={NEStyle.imgBtn}>
+        <Image source={require('../Image/save.png')} />
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 
@@ -112,38 +108,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(NoteEditor);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  Title: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '80%',
-    height: '10%',
-    marginTop: 1,
-  },
-  Note: {
-    height: '80%',
-    margin: 5,
-  },
-  btnView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    margin: 5,
-    height: '10%',
-  },
-  NoteTextStyle: {
-    marginLeft: 10,
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'grey',
-  },
-  HeaderTextInput: {
-    fontSize: 20,
-    color: 'red',
-    fontWeight: 'bold',
-  },
-});
