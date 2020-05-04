@@ -25,12 +25,12 @@ const NoteLister = ({notes, NoteAction6, item}) => {
 
   const KeepPressed = () => {
     Alert.alert(
-      'Alert',
+      'Do you want Delate this note?',
       item.Title,
 
       [
         {
-          text: 'Remove this Note',
+          text: 'OK',
           onPress: () => NoteRemove(item.ID),
         },
         {text: '', onPress: () => console.log('OK Pressed')},

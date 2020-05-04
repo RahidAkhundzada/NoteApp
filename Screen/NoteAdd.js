@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ANStyleheet,
-  View,
-  TextInput,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {View, TextInput, Image, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {
